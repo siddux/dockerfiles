@@ -87,10 +87,11 @@ for FILE in $DIRECTORY/*$DOCKERFILE_EXTENSION; do
     while read TAG; do
         # Build the Docker image using the current file, tag, and date
         docker build -f $FILE --target $TAG -t $DOCKERFILE_REPO:$NAME-$TAG-$DATE .
-    done < ./$TAG_FILE
+    done < $DIRECTORY/../$TAG_FILE
 done
 
 echo "Done: all images have been built correctly!"
+docker images
 
 if [ "$UPLOAD" = true ]; then
   docker push -a $DOCKERFILE_REPO
