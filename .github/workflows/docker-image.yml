@@ -21,4 +21,6 @@ jobs:
     - name: Build the Docker image
       run: | 
        ${GITHUB_WORKSPACE}/ros/generate_images.bash -d ${GITHUB_WORKSPACE}/ros/noetic/ -u
-       docker images
+       ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/foxy/ -u
+       ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/galactic/ -u
+       ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/humble/ -u
