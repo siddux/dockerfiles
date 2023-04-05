@@ -64,7 +64,7 @@ if [ -z "$(ls -A $DIRECTORY)" ]; then
 fi
 
 # Check if the tags file exists
-if [ ! -f "$PWD/$TAG_FILE" ]; then
+if [ ! -f "$DIRECTORY/../$TAG_FILE" ]; then
     echo "Error: tags file does not exist"
     exit 1
 fi
