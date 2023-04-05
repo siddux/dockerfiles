@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: ${GITHUB_WORKSPACE}/ros/generate_images.bash -d noetic/ -u
+         ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d foxy/ -u
+         ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d galactic/ -u
+         ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d humble/ -u
