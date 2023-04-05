@@ -15,8 +15,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: |
-         chmod +x ${GITHUB_WORKSPACE}/ros/generate_images.bash
-         ${GITHUB_WORKSPACE} /ros/generate_images.bash -d noetic/ -u
-         chmod +x ${GITHUB_WORKSPACE} /ros2/generate_images.bash
+      run: ${GITHUB_WORKSPACE} /ros/generate_images.bash -d noetic/ -u
          ${GITHUB_WORKSPACE} /ros2/generate_images.bash -d noetic/ -u
