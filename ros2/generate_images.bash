@@ -57,6 +57,12 @@ if [ ! -d "$DIRECTORY" ]; then
   exit 1
 fi
 
+# Check if the directory is empty
+if [ -z "$(ls -A $DIRECTORY)" ]; then
+  echo "Directory is empty, skipping images"
+  exit 0
+fi
+
 # Check if the tags file exists
 if [ ! -f "$TAG_FILE" ]; then
     echo "Error: tags file does not exist"
