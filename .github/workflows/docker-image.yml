@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+         chmod +x ./ros/generate_images.bash
+         ./ros/generate_images.bash -d noetic/ -u
+         chmod +x ./ros2/generate_images.bash
+         ./ros2/generate_images.bash -d noetic/ -u
