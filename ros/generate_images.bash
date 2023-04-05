@@ -91,6 +91,7 @@ for FILE in $DIRECTORY/*$DOCKERFILE_EXTENSION; do
 done
 
 echo "Done: all images have been built correctly!"
+docker images
 
 if [ "$UPLOAD" = true ]; then
   docker push -a $DOCKERFILE_REPO
