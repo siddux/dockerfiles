@@ -86,7 +86,7 @@ for FILE in $DIRECTORY/*$DOCKERFILE_EXTENSION; do
     # Loop through each tag in the tag file
     while read TAG; do
         # Build the Docker image using the current file, tag, and date
-        docker build -f $FILE --target $TAG -t $DOCKERFILE_REPO:$NAME-$TAG-$DATE .
+        docker build -f $FILE --target $TAG -t $DOCKERFILE_REPO:$NAME-$TAG -t $DOCKERFILE_REPO:$NAME-$TAG-$DATE .
     done < $DIRECTORY/../$TAG_FILE
 done
 
