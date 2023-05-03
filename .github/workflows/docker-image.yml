@@ -59,3 +59,16 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/humble/ -u
+
+  iron-deploy:
+    name: iron-deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/iron/ -u
