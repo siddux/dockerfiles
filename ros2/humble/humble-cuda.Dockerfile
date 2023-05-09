@@ -116,7 +116,6 @@ FROM full AS opencv
 ENV DEBIAN_FRONTEND=noninteractive
 # Install the full release
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  apt-get install -y \
   python3-pip \
   build-essential \
   cmake \
