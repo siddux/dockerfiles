@@ -109,6 +109,87 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV DEBIAN_FRONTEND=
 
 ###########################################
+#  Opencv image 
+###########################################
+FROM full AS opencv
+
+ENV DEBIAN_FRONTEND=noninteractive
+# Install the full release
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  apt-get install -y \
+  python3-pip \
+  build-essential \
+  cmake \
+  ffmpeg \
+  git \
+  wget \
+  unzip \
+  yasm \
+  pkg-config \
+  libswscale-dev \
+  libtbb2 \
+  libtbb-dev \
+  libjpeg-dev \
+  libpng-dev \
+  libtiff-dev \
+  libavformat-dev \
+  libpq-dev \
+  libxine2-dev \
+  libglew-dev \
+  libtiff5-dev \
+  zlib1g-dev \
+  libjpeg-dev \
+  libavdevice-dev \
+  libavcodec-dev \
+  libavformat-dev \
+  libavutil-dev \
+  libpostproc-dev \
+  libswscale-dev \
+  libeigen3-dev \
+  libtbb-dev \
+  libgtk2.0-dev \
+  libusb-1.0 \
+  pkg-config \
+  ## Python
+  python3-dev \
+  python3-numpy \
+  && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=
+
+ARG OPENCV_VERSION=4.5.3
+
+RUN cd /opt/ &&\
+  # Download and unzip OpenCV and opencv_contrib and delte zip files
+  wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip &&\
+  unzip $OPENCV_VERSION.zip &&\
+  rm $OPENCV_VERSION.zip &&\
+  wget https://github.com/opencv/opencv_contrib/archive/$OPENCV_VERSION.zip &&\
+  unzip ${OPENCV_VERSION}.zip &&\
+  rm ${OPENCV_VERSION}.zip &&\
+  # Create build folder and switch to it
+  mkdir /opt/opencv-${OPENCV_VERSION}/build && cd /opt/opencv-${OPENCV_VERSION}/build &&\
+  # Cmake configure
+  cmake \
+    -DOPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
+    -DCMAKE_BUILD_TYPE=RELEASE \
+    # Install path will be /usr/local/lib (lib is implicit)
+    -DCMAKE_INSTALL_PREFIX=/usr/local \
+    .. &&\
+    # Make
+  make -j"$(nproc)" && \
+  # Install to /usr/local/lib
+  make install && \
+  ldconfig
+
+#Move Opencv2 folder to /usr/local/include
+RUN mv /usr/local/include/opencv4/opencv2 /usr/local/include/
+RUN rm -rf /usr/local/include/opencv4
+
+# Remove OpenCV sources and build folder
+RUN rm -rf /opt/opencv-${OPENCV_VERSION} && rm -rf /opt/opencv_contrib-${OPENCV_VERSION}
+
+
+###########################################
 #  Full+Gazebo image 
 ###########################################
 FROM full AS gazebo
