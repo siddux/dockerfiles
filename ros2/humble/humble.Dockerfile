@@ -180,10 +180,6 @@ RUN cd /opt/ &&\
   make install && \
   ldconfig
 
-#Move Opencv2 folder to /usr/local/include
-RUN mv /usr/local/include/opencv4/opencv2 /usr/local/include/
-RUN rm -rf /usr/local/include/opencv4
-
 # Remove OpenCV sources and build folder
 RUN rm -rf /opt/opencv-${OPENCV_VERSION} && rm -rf /opt/opencv_contrib-${OPENCV_VERSION}
 
