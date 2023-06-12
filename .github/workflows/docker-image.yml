@@ -9,6 +9,7 @@ on:
 jobs:
 
   noetic-deploy:
+    if: contains(github.event.head_commit.message, 'noetic')
     name: noetic-deploy
     runs-on: ubuntu-latest
 
@@ -22,6 +23,7 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros/generate_images.bash -d ${GITHUB_WORKSPACE}/ros/noetic/ -u
        
   foxy-deploy:
+    if: contains(github.event.head_commit.message, 'foxy')
     name: foxy-deploy
     runs-on: ubuntu-latest
 
@@ -35,6 +37,7 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/foxy/ -u
       
   galactic-deploy:
+    if: contains(github.event.head_commit.message, 'galactic')
     name: galactic-deploy
     runs-on: ubuntu-latest
 
@@ -48,6 +51,7 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/galactic/ -u
       
   humble-deploy:
+    if: contains(github.event.head_commit.message, 'humble')
     name: humble-deploy
     runs-on: ubuntu-latest
 
@@ -61,6 +65,7 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/humble/ -u
 
   iron-deploy:
+    if: contains(github.event.head_commit.message, 'iron')
     name: iron-deploy
     runs-on: ubuntu-latest
 
