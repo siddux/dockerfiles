@@ -9,7 +9,8 @@ on:
 jobs:
 
   noetic-deploy:
-    if: contains(github.event.head_commit.message, 'noetic')
+    if: contains(github.event.head_commit.message, 'noetic') ||
+        contains(github.event.head_commit.message, 'all')
     name: noetic-deploy
     runs-on: ubuntu-latest
 
@@ -23,7 +24,9 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros/generate_images.bash -d ${GITHUB_WORKSPACE}/ros/noetic/ -u
        
   foxy-deploy:
-    if: contains(github.event.head_commit.message, 'foxy')
+    if: contains(github.event.head_commit.message, 'foxy') ||
+        contains(github.event.head_commit.message, 'ros 2') ||
+        contains(github.event.head_commit.message, 'all')
     name: foxy-deploy
     runs-on: ubuntu-latest
 
@@ -37,7 +40,9 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/foxy/ -u
       
   galactic-deploy:
-    if: contains(github.event.head_commit.message, 'galactic')
+    if: contains(github.event.head_commit.message, 'galactic') ||
+        contains(github.event.head_commit.message, 'ros 2') ||
+        contains(github.event.head_commit.message, 'all')
     name: galactic-deploy
     runs-on: ubuntu-latest
 
@@ -51,7 +56,9 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/galactic/ -u
       
   humble-deploy:
-    if: contains(github.event.head_commit.message, 'humble')
+    if: contains(github.event.head_commit.message, 'humble') ||
+        contains(github.event.head_commit.message, 'ros 2') ||
+        contains(github.event.head_commit.message, 'all')
     name: humble-deploy
     runs-on: ubuntu-latest
 
@@ -65,7 +72,9 @@ jobs:
       run: ${GITHUB_WORKSPACE}/ros2/generate_images.bash -d ${GITHUB_WORKSPACE}/ros2/humble/ -u
 
   iron-deploy:
-    if: contains(github.event.head_commit.message, 'iron')
+    if: contains(github.event.head_commit.message, 'iron') ||
+        contains(github.event.head_commit.message, 'ros 2') ||
+        contains(github.event.head_commit.message, 'all')
     name: iron-deploy
     runs-on: ubuntu-latest
 

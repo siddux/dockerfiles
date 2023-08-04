@@ -5,7 +5,7 @@
 ###########################################
 # Base image 
 ###########################################
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04 AS base
+FROM nvidia/cuda:12.0.0-cudnn8-devel-ubuntu22.04 AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -39,9 +39,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install cuda toolkit
-RUN wget https://developer.download.nvidia.com/compute/cuda/11.7.1/local_installers/cuda_11.7.1_515.65.01_linux.run \
-  && sh cuda_11.7.1_515.65.01_linux.run --toolkit --silent --override \
-  && rm cuda_11.7.1_515.65.01_linux.run
+RUN wget https://developer.download.nvidia.com/compute/cuda/12.2.1/local_installers/cuda_12.2.1_535.86.10_linux.run \
+  && sh cuda_12.2.1_535.86.10_linux.run --toolkit --silent --override \
+  && rm cuda_12.2.1_535.86.10_linux.run
 
 # Install ROS2
 RUN sudo add-apt-repository universe \
